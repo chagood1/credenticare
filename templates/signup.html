@@ -1,0 +1,52 @@
+
+
+
+
+{% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+  <form
+    method="post"
+    action="/signup"
+    class="bg-white dark:bg-gray-800 p-8 rounded shadow-md w-full max-w-sm"
+  >
+    <h2 class="text-2xl mb-4 text-center text-blue-600">Sign Up</h2>
+
+    {% if error %}
+      <div class="bg-red-100 text-red-700 p-2 mb-4 rounded">{{ error }}</div>
+    {% endif %}
+
+    <label class="block mb-2">
+      <span class="text-sm">Email</span>
+      <input
+        type="email"
+        name="email"
+        required
+        class="mt-1 block w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
+      />
+    </label>
+
+    <label class="block mb-4">
+      <span class="text-sm">Password</span>
+      <input
+        type="password"
+        name="password"
+        required
+        class="mt-1 block w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600"
+      />
+    </label>
+
+    <button
+      type="submit"
+      class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    >
+      Create Account
+    </button>
+
+    <p class="mt-4 text-sm text-center">
+      Already have an account?
+      <a href="/login" class="text-blue-600 underline">Log in</a>
+    </p>
+  </form>
+</div>
+{% endblock %}
