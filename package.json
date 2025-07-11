@@ -3,10 +3,39 @@
   "version": "1.0.0",
   "main": "postcss.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:css": "tailwindcss -i ./static/css/tailwind.css -o ./static/css/tailwind.min.css --minify",
+    "watch:css": "tailwindcss -i ./static/css/tailwind.css -o ./static/css/tailwind.min.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chagood1/credenticare.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chagood1/credenticare/issues"
+  },
+  "homepage": "https://github.com/chagood1/credenticare#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^4.1.11"
+  },
+  "dependencies": {
+    "browserslist": "^4.25.1",
+    "caniuse-lite": "^1.0.30001727",
+    "electron-to-chromium": "^1.5.182",
+    "escalade": "^3.2.0",
+    "fraction.js": "^4.3.7",
+    "nanoid": "^3.3.11",
+    "node-releases": "^2.0.19",
+    "normalize-range": "^0.1.2",
+    "picocolors": "^1.1.1",
+    "postcss-value-parser": "^4.2.0",
+    "source-map-js": "^1.2.1",
+    "update-browserslist-db": "^1.1.3"
+  },
   "description": ""
 }

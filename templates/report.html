@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Report – CredentiCare{% endblock %}
+
+{% block content %}
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-4">CE Report</h1>
+
+    {% if records %}
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Date</th>
+              <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Course</th>
+              <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Hours</th>
+              <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Notes</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            {% for r in records %}
+              <tr>
+                <td class="px-4 py-2 text-sm">{{ r.date_completed }}</td>
+                <td class="px-4 py-2 text-sm">{{ r.course_id }}</td>
+                <td class="px-4 py-2 text-sm">{{ r.hours_earned }}</td>
+                <td class="px-4 py-2 text-sm">{{ r.notes or "–" }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6">
+        <p class="text-gray-700">
+          <strong>Total Hours:</strong> {{ status.hours_completed }} /
+          {{ status.required_hours }}
+        </p>
+        <p class="text-gray-700"><strong>Remaining:</strong> {{ status.hours_remaining }}</p>
+        <p class="text-gray-700"><strong>Next Renewal:</strong> {{ status.next_renewal }}</p>
+      </div>
+    {% else %}
+      <p class="text-gray-600">No report data available. <a href="/ce/records/upload" class="text-blue-600 hover:underline">Log some CE first</a>.</p>
+    {% endif %}
+  </div>
+{% endblock %}

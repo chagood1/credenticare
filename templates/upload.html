@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Upload CE Record – CredentiCare{% endblock %}
+
+{% block content %}
+  <div class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Upload CE Record</h1>
+
+    {% if error %}
+      <div class="bg-red-100 text-red-700 p-2 mb-4 rounded">{{ error }}</div>
+    {% endif %}
+
+    <form action="/ce/records/upload" method="post" class="space-y-4">
+      <div>
+        <label for="course_id" class="block text-sm font-medium text-gray-700">Course</label>
+        <select
+          name="course_id"
+          id="course_id"
+          required
+          class="mt-1 block w-full p-2 border rounded"
+        >
+          {% for c in courses %}
+            <option value="{{ c.id }}">{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label for="date_completed" class="block text-sm font-medium text-gray-700">Date Completed</label>
+        <input
+          type="date"
+          name="date_completed"
+          id="date_completed"
+          required
+          class="mt-1 block w-full p-2 border rounded"
+        />
+      </div>
+
+      <div>
+        <label for="hours_earned" class="block text-sm font-medium text-gray-700">Hours Earned</label>
+        <input
+          type="number"
+          name="hours_earned"
+          id="hours_earned"
+          min="1"
+          required
+          class="mt-1 block w-full p-2 border rounded"
+        />
+      </div>
+
+      <div>
+        <label for="notes" class="block text-sm font-medium text-gray-700">Notes (optional)</label>
+        <textarea
+          name="notes"
+          id="notes"
+          rows="3"
+          class="mt-1 block w-full p-2 border rounded"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+{% endblock %}

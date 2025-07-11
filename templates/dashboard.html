@@ -1,13 +1,52 @@
 {% extends "base.html" %}
 
+{% block title %}Dashboard – CredentiCare{% endblock %}
+
 {% block content %}
-<div class="min-h-screen p-8 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-  <h1 class="text-3xl font-bold mb-6 text-blue-600">Welcome to CredentiCare!</h1>
-  <p class="mb-4">🎉 Your account is set up. This is your dashboard placeholder.</p>
-  <ul class="list-disc pl-5 space-y-2">
-    <li><strong>Upload CE</strong>: Coming soon</li>
-    <li><strong>View Progress</strong>: Coming soon</li>
-    <li><strong>Download Report</strong>: Coming soon</li>
-  </ul>
-</div>
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold mb-4">Welcome to CredentiCare!</h1>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Your CE Progress</h2>
+      <p>{{ status.hours_completed }} / {{ status.required_hours }} hours completed</p>
+      <div class="w-full bg-gray-200 rounded-lg overflow-hidden h-4 my-2">
+        <div
+          class="h-4"
+          style="width: {{ (status.hours_completed / status.required_hours) * 100 }}%;">
+        </div>
+      </div>
+      <p class="text-sm">Hours remaining: {{ status.hours_remaining }}</p>
+      <p class="text-sm">Next renewal: {{ status.next_renewal }}</p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">Your CE Records</h2>
+      {% if records %}
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Date</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Course</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Hours</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">Notes</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              {% for r in records %}
+                <tr>
+                  <td class="px-4 py-2 text-sm">{{ r.date_completed }}</td>
+                  <td class="px-4 py-2 text-sm">{{ r.course_id }}</td>
+                  <td class="px-4 py-2 text-sm">{{ r.hours_earned }}</td>
+                  <td class="px-4 py-2 text-sm">{{ r.notes or "–" }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="text-gray-600">No CE records yet. <a href="/ce/records/upload" class="text-blue-600 hover:underline">Log your first course</a>.</p>
+      {% endif %}
+    </section>
+  </div>
 {% endblock %}

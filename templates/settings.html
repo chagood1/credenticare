@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Settings – CredentiCare{% endblock %}
+
+{% block content %}
+  <div class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Account Settings</h1>
+
+    <form method="post" action="{{ url_for('settings.update') }}" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Email</label>
+        <input
+          type="email"
+          name="email"
+          value="{{ user.email }}"
+          disabled
+          class="mt-1 block w-full p-2 border rounded bg-gray-100 cursor-not-allowed"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="••••••••"
+          class="mt-1 block w-full p-2 border rounded"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">State / License</label>
+        <select
+          name="state"
+          class="mt-1 block w-full p-2 border rounded"
+        >
+          {% for s in states %}
+            <option value="{{ s.code }}" {% if s.code == user.state %}selected{% endif %}>
+              {{ s.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+      >
+        Save Changes
+      </button>
+    </form>
+  </div>
+{% endblock %}
