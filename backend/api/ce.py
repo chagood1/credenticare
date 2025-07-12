@@ -1,5 +1,8 @@
+
 # backend/api/ce.py
 
+
+from backend.deps import get_current_user, User
 import json
 from fastapi import APIRouter, Depends, HTTPException, Request, Form
 from fastapi.responses import RedirectResponse
@@ -153,3 +156,7 @@ async def upload_ce_submit(
         }, status_code=400)
 
     return RedirectResponse(url="/dashboard", status_code=303)
+
+
+
+#   python -m uvicorn backend.api.ce:router --reloadpython -m uvicorn backend.main:app --reload
